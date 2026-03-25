@@ -1,0 +1,71 @@
+<div class="u-container">
+  <style>
+    .u-container { font-family: 'Segoe UI', Arial; max-width: 800px; margin: auto; background: #fdfdfd; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; }
+    .u-header { background: #c0392b; color: white; padding: 25px; text-align: center; }
+    .u-instr { background: #fff5f5; padding: 15px; border-bottom: 1px solid #eee; font-size: 0.9em; border-left: 5px solid #c0392b; margin: 10px; }
+    .u-content { padding: 20px; }
+    .u-pregunta { margin-bottom: 20px; padding: 15px; border-bottom: 1px solid #eee; }
+    .u-opciones { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .u-btn { padding: 10px; border: 1px solid #ccc; border-radius: 5px; cursor: pointer; background: white; text-align: left; }
+    .u-btn.selected { border-color: #c0392b; background: #fff1f1; }
+    .u-btn.correct { background: #d4edda !important; border-color: #28a745 !important; }
+    .u-btn.wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
+    .u-verificar { background: #c0392b; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; }
+    .u-feedback { display: none; margin-top: 10px; padding: 10px; border-radius: 5px; font-weight: bold; }
+  </style>
+
+  <div class="u-header">
+    <h2>Unidad 2: Datos Generales del Ecuador</h2>
+    <p>Geografía del Ecuador - Licencia Tipo E</p>
+  </div>
+
+  <div class="u-instr">
+    <strong>Instrucciones:</strong> Evaluación rápida de datos territoriales y políticos. Selecciona y verifica.
+  </div>
+
+  <div class="u-content">
+    <div class="u-pregunta" id="u2q1">
+      <p><strong>1. ¿Cuál es la superficie total aproximada del territorio ecuatoriano?</strong></p>
+      <div class="u-opciones">
+        <button class="u-btn" onclick="selU2(this,'u2q1','B')">A) 156.370 km²</button>
+        <button class="u-btn" onclick="selU2(this,'u2q1','B')">B) 256.370 km²</button>
+      </div>
+      <div class="u-feedback" id="fbu2q1"></div>
+      <button class="u-verificar" onclick="verU2('u2q1','B','Incluye las regiones Costa, Sierra, Amazonía e Insular.')">Verificar</button>
+    </div>
+
+    <div class="u-pregunta" id="u2q2">
+      <p><strong>2. ¿Cuál es la región natural más extensa del Ecuador?</strong></p>
+      <div class="u-opciones">
+        <button class="u-btn" onclick="selU2(this,'u2q2','A')">A) Amazonía (43%)</button>
+        <button class="u-btn" onclick="selU2(this,'u2q2','B')">B) Costa</button>
+      </div>
+      <div class="u-feedback" id="fbu2q2"></div>
+      <button class="u-verificar" onclick="verU2('u2q2','A','Ocupa casi la mitad del territorio nacional.')">Verificar</button>
+    </div>
+
+    <div class="u-pregunta" id="u2q3">
+      <p><strong>3. La Función del Estado encargada de crear y aprobar leyes es:</strong></p>
+      <div class="u-opciones">
+        <button class="u-btn" onclick="selU2(this,'u2q3','B')">A) Función Ejecutiva</button>
+        <button class="u-btn" onclick="selU2(this,'u2q3','B')">B) Función Legislativa</button>
+      </div>
+      <div class="u-feedback" id="fbu2q3"></div>
+      <button class="u-verificar" onclick="verU2('u2q3','B','Representada por la Asamblea Nacional.')">Verificar</button>
+    </div>
+  </div>
+
+  <script>
+    var resU2 = {}; var doneU2 = {};
+    function selU2(el, q, l){ if(doneU2[q]) return; resU2[q]=l; el.parentNode.querySelectorAll('.u-btn').forEach(b=>b.classList.remove('selected')); el.classList.add('selected'); }
+    function verU2(q, c, f){
+      if(doneU2[q] || !resU2[q]) return; doneU2[q]=true;
+      var p = document.getElementById(q); var fb = document.getElementById('fb'+q);
+      p.querySelectorAll('.u-btn').forEach(b=>{
+        if(b.innerText.startsWith(c)) b.classList.add('correct');
+        else if(b.innerText.startsWith(resU2[q])) b.classList.add('wrong');
+      });
+      fb.style.display = 'block'; fb.innerHTML = (resU2[q]==c ? '✅ Correcto. ' : '❌ Incorrecto. ') + f;
+    }
+  </script>
+</div>
